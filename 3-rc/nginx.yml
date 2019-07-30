@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: webservice
+  labels:
+    app: webservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webservice
+  template:
+    metadata:
+      labels:
+        app: webservice
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - name: http-port
+          containerPort: 80
+

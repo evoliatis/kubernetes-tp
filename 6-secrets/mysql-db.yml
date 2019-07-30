@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-db
+type: Opaque
+data:
+  login: cm9vdAo=
+  password: c2VjcmV0Cg==

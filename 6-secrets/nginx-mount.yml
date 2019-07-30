@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mount.evoliatis.fr
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - name: http-port
+          containerPort: 80
+        volumeMounts:
+        - name: secret-volume
+          mountPath: /etc/secret
+          readOnly: true
+      volumes:
+      - name: secret-volume
+        secret: 
+          secretName: mysql-db

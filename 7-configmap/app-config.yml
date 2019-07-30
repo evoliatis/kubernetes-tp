@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  driver: mysql
+  db: wordpress_db
+  login: wordpress
+  password: secret
+  param.wordpress.titre: Ceci est un test

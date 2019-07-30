@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret.evoliatis.fr
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx-demo
+    image: nginx
+    ports:
+    - name: nginx-port
+      containerPort: 80
+    env:
+    - name: UTILISATEUR
+      valueFrom:
+        secretKeyRef:
+          name: mysql-db
+          key: login
+    - name: MDP
+      valueFrom:
+        secretKeyRef:
+          name: mysql-db
+          key: password

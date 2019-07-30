@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wordpress-rules
+spec:
+  rules:
+
+  - host: wordpress.evoliatis.lan
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: wordpress-service
+          servicePort: 31000
+
+  - host: phpmyadmin.evoliatis.lan
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: phpmyadmin-service
+          servicePort: 32000
+
+

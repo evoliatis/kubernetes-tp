@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-db
+type: Opaque
+data:
+  # valeur: secret
+  password: c2VjcmV0
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-local
+  labels:
+    app: mysql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: mysql.evoliatis.fr
+  labels:
+    app: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-db
+              key: password
+        ports:
+        - containerPort: 3306
+          name: mysql-port
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: mysql-local
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  ports:
+  - port: 31000
+    nodePort: 31000
+    targetPort: mysql-port
+    protocol: TCP
+  selector:
+    app: mysql
+  type: NodePort
