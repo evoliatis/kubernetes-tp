@@ -6,7 +6,7 @@ spec:
   ports:
   - port: 31000
     nodePort: 31000
-    targetPort: http-port
+    targetPort: nginx-port
     protocol: TCP
   selector:
     app: nginx
