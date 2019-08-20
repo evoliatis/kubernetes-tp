@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: phpmyadmin-service
+  namespace: app-wordpress
   labels:
     app: wordpress
     tier: backend

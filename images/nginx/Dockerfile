@@ -1,20 +1,18 @@
-# Image source
-FROM ubuntu:xenial
+# Source
+FROM ubuntu:bionic
 
-# Environnement
+# Install
 ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update ; apt-get install -y nginx ; \
+    rm /var/www/html/index.nginx-debian.html
 
-# Installation
-RUN apt-get update ; apt-get install -y nginx
+# Injection
+ADD ressources /
 
-# Mise en place de mes fichiers
-COPY ressources /
-
-# Dossier partagé
+# Partage
 VOLUME [ "/var/www/html" ]
-
-# Ouverture du port 80
 EXPOSE 80
 
 # Démarrage
-ENTRYPOINT [ "nginx" , "-g", "daemon off;" ]
+ENTRYPOINT [ "nginx" ]
+CMD [ "-g" , "daemon off;" ]

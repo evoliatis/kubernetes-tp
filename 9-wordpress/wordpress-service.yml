@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: wordpress-service
+  namespace: app-wordpress
   labels:
     app: wordpress
     tier: frontend
