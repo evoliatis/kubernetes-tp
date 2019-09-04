@@ -1,9 +1,31 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stress
+  labels:
+    app: stress
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  labels:
+     app: stress
+  namespace: stress
+spec:
+  hard:
+    requests.memory: 32Mi
+    requests.cpu: "250m"
+    limits.memory: 64Mi
+    limits.cpu: "500m"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stress
   labels:
      app: stress
+  namespace: stress
 spec:
   selector:
     matchLabels:
@@ -20,6 +42,3 @@ spec:
         args:
           - -c
           - "1"
-        resources:
-          requests:
-            cpu: 1000m

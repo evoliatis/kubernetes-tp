@@ -4,6 +4,7 @@ metadata:
   name: stress
   labels:
      app: stress
+  namespace: stress
 spec:
   selector:
     matchLabels:
@@ -20,6 +21,3 @@ spec:
         args:
           - -c
           - "1"
-        resources:
-          requests:
-            cpu: 1000m
