@@ -4,8 +4,8 @@ metadata:
   name: nginx-http
 spec:
   ports:
-  - port: 31000
-    nodePort: 31000
+  - port: 31300
+    nodePort: 31300
     targetPort: http-port
     protocol: TCP
   selector:
