@@ -4,8 +4,8 @@ metadata:
   name: mysql-service
 spec:
   ports:
-  - port: 31000
-    nodePort: 31000
+  - port: 31500
+    nodePort: 31500
     targetPort: mysql-port
     protocol: TCP
   selector:
