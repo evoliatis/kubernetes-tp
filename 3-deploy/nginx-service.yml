@@ -4,9 +4,9 @@ metadata:
   name: nginx-service
 spec:
   ports:
-  - port: 31000
-    nodePort: 31000
-    targetPort: nginx-port
+  - port: 31002
+    nodePort: 31002
+    targetPort: deploy-port
     protocol: TCP
   selector:
     app: nginx
