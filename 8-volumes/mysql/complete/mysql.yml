@@ -19,6 +19,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
+  storageClassName: standard
 ---
 apiVersion: apps/v1 
 kind: Deployment
