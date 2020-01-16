@@ -190,7 +190,7 @@ spec:
     app: wordpress
   ports:
     - port: 31000
-      targetPort: 80
+      targetPort: wordpress-port
   type: ClusterIP
 ---
 apiVersion: apps/v1 
@@ -237,7 +237,7 @@ spec:
     app: wordpress
   ports:
     - port: 32000
-      targetPort: 80
+      targetPort: phpmyadmin-port
   type: ClusterIP
 ---
 apiVersion: extensions/v1beta1
