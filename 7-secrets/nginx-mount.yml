@@ -1,30 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: mount.evoliatis.fr
+  name: mount.secret.evoliatis.fr
   labels:
     app: nginx
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - name: http-port
-          containerPort: 80
-        volumeMounts:
-        - name: secret-volume
-          mountPath: /etc/secret
-          readOnly: false
-      volumes:
-      - name: secret-volume
-        secret: 
-          secretName: mysql-db
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - name: http-port
+      containerPort: 80
+    volumeMounts:
+    - name: secret-volume
+      mountPath: /etc/secret
+      readOnly: false
+  volumes:
+  - name: secret-volume
+    secret: 
+      secretName: nginx-secrets

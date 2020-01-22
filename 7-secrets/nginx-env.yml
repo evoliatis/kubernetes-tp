@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: secret.evoliatis.fr
+  name: env.secret.evoliatis.fr
   labels:
     app: nginx
 spec:
@@ -15,10 +15,10 @@ spec:
     - name: UTILISATEUR
       valueFrom:
         secretKeyRef:
-          name: mysql-db
+          name: nginx-secrets
           key: login
     - name: MDP
       valueFrom:
         secretKeyRef:
-          name: mysql-db
+          name: nginx-secrets
           key: password
