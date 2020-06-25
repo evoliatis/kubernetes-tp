@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Installation du dashboard sur Rancher"
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
 kubectl rollout status deploy/kubernetes-dashboard -n kube-system
 sleep 5
 echo "Publication du port"
