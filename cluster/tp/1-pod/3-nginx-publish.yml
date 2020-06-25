@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-rules
+  labels:
+    app: nginx
+spec:
+  rules:
+
+  - host: formation-01.en-ligne.evoliatis.fr
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-service
+          servicePort: 31000          

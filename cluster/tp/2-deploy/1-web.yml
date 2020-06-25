@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slave-01.en-ligne.evoliatis.fr
+  labels:
+    app: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: instance
+        image: emilevauge/whoami
+        ports:
+        - name: web-port
+          containerPort: 80

@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web-rules
+  labels:
+    app: web
+spec:
+  rules:
+
+  - host: slave-01.en-ligne.evoliatis.fr
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-service
+          servicePort: 31000          
