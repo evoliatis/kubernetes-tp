@@ -3,12 +3,14 @@ kind: Service
 metadata:
   name: webservice-service
   namespace: webservice
+  labels:
+    app: webservice
 spec:
   ports:
-  - port: 31200
-    nodePort: 31200
-    targetPort: webservice-port
-    protocol: TCP
+    - port: 31200
+      nodePort: 31200
+      targetPort: webservice-port
+      protocol: TCP
   selector:
     app: webservice
   type: NodePort
