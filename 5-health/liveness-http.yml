@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-healthcheck
+  name: liveness-http
   labels:
-    app: nginx
+    test: liveness
 spec:
   containers:
-  - name: nginx-demo
+  - name: liveness-http
     image: nginx
     ports:
     - name: nginx-port

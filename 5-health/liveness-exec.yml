@@ -6,7 +6,7 @@ metadata:
   name: liveness-exec
 spec:
   containers:
-  - name: liveness
+  - name: liveness-exec
     image: k8s.gcr.io/busybox
     args:
     - /bin/sh

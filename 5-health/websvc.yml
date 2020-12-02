@@ -15,15 +15,20 @@ spec:
         app: webservice
     spec:
       containers:
-      - name: webservice
-        image: emilevauge/whoami
-        ports:
-          - name: webservice-port
-            containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 15
-          timeoutSeconds: 30
-          periodSeconds: 30
+        - name: webservice
+          image: emilevauge/whoami
+          ports:
+            - name: webservice-port
+              containerPort: 80
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            timeoutSeconds: 30
+            periodSeconds: 30
