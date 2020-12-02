@@ -74,39 +74,39 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: mysql:5.7
-        name: mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: wordpress-secrets
-              key: root-password
-        - name: MYSQL_DATABASE
-          valueFrom:
-            secretKeyRef:
-              name: wordpress-secrets
-              key: db-name
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: wordpress-secrets
-              key: db-login
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: wordpress-secrets
-              key: db-password
-        ports:
-        - containerPort: 3306
+        - image: mysql:5.7
           name: mysql
-        volumeMounts:
-        - name: mysql-volume
-          mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secrets
+                  key: root-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secrets
+                  key: db-name
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secrets
+                  key: db-login
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secrets
+                  key: db-password
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-volume
+              mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-volume
-        persistentVolumeClaim:
-          claimName: mysql-local
+        - name: mysql-volume
+          persistentVolumeClaim:
+            claimName: mysql-local
 ---
 apiVersion: v1
 kind: Service
@@ -124,7 +124,7 @@ spec:
     tier: mysql
   clusterIP: None
 ---
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress-front
@@ -146,36 +146,36 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress
-        name: wordpress
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql
-        - name: WORDPRESS_DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: wordpress-secrets
-              key: db-login
-        - name: WORDPRESS_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: wordpress-secrets
-              key: db-password
-        - name: WORDPRESS_DB_NAME
-          valueFrom:
-            secretKeyRef:
-              name: wordpress-secrets
-              key: db-name
-        ports:
-        - containerPort: 80
-          name: wordpress-port
-        volumeMounts:
-        - name: wordpress-volume
-          mountPath: /var/www/html
+        - image: wordpress
+          name: wordpress
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: wordpress-mysql
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secrets
+                  key: db-login
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secrets
+                  key: db-password
+            - name: WORDPRESS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secrets
+                  key: db-name
+          ports:
+            - containerPort: 80
+              name: wordpress-port
+          volumeMounts:
+            - name: wordpress-volume
+              mountPath: /var/www/html
       volumes:
-      - name: wordpress-volume
-        persistentVolumeClaim:
-          claimName: wordpress-local
+        - name: wordpress-volume
+          persistentVolumeClaim:
+            claimName: wordpress-local
 ---
 apiVersion: v1
 kind: Service
@@ -193,7 +193,7 @@ spec:
       targetPort: wordpress-port
   type: ClusterIP
 ---
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress-back
@@ -215,14 +215,14 @@ spec:
         tier: backend
     spec:
       containers:
-      - image: nazarpc/phpmyadmin
-        name: phpmyadmin
-        env:
-        - name: MYSQL_HOST
-          value: wordpress-mysql
-        ports:
-        - containerPort: 80
-          name: phpmyadmin-port
+        - image: nazarpc/phpmyadmin
+          name: phpmyadmin
+          env:
+            - name: MYSQL_HOST
+              value: wordpress-mysql
+          ports:
+            - containerPort: 80
+              name: phpmyadmin-port
 ---
 apiVersion: v1
 kind: Service
@@ -240,26 +240,30 @@ spec:
       targetPort: phpmyadmin-port
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: wordpress-rules
   namespace: app-wordpress
 spec:
   rules:
-
-  - host: wordpress.evoliatis.lan
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: wordpress-service
-          servicePort: 31000
-
-  - host: phpmyadmin.evoliatis.lan
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: phpmyadmin-service
-          servicePort: 32000
+    - host: wordpress.evoliatis.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress-service
+                port:
+                  number: 31000
+    - host: phpmyadmin.evoliatis.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpmyadmin-service
+                port:
+                  number: 32000
