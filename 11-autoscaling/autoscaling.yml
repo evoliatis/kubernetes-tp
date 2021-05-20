@@ -23,7 +23,6 @@ metadata:
   name: stress
   labels:
     app: stress
-  namespace: stress
 spec:
   selector:
     matchLabels:
