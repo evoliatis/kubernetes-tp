@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: stress
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 4
   metrics:
   - type: Resource
     resource:
