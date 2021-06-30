@@ -16,6 +16,7 @@ spec:
       initialDelaySeconds: 5
       periodSeconds: 10
     livenessProbe:
+      failureThreshold: 3
       tcpSocket:
         port: 80
       initialDelaySeconds: 15
