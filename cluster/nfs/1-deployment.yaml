@@ -30,11 +30,11 @@ spec:
             - name: PROVISIONER_NAME
               value: k8s-sigs.io/nfs-subdir-external-provisioner
             - name: NFS_SERVER
-              value: <ADRESSE IP NFS>
+              value: 10.68.234.91
             - name: NFS_PATH
               value: /export
       volumes:
         - name: nfs-client-root
           nfs:
-            server: <ADRESSE IP NFS>
+            server: 10.68.234.91
             path: /export
