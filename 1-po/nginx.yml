@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: nginx-demo
-    image: evoliatis/nginx:2
+    image: nginx
     ports:
     - name: nginx-port
       containerPort: 80
