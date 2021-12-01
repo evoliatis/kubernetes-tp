@@ -77,22 +77,22 @@ spec:
         - image: mariadb
           name: mysql
           env:
-            - name: MYSQL_ROOT_PASSWORD
+            - name: MARIADB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: wordpress-secrets
                   key: root-password
-            - name: MYSQL_DATABASE
+            - name: MARIADB_DATABASE
               valueFrom:
                 secretKeyRef:
                   name: wordpress-secrets
                   key: db-name
-            - name: MYSQL_USER
+            - name: MARIADB_USER
               valueFrom:
                 secretKeyRef:
                   name: wordpress-secrets
                   key: db-login
-            - name: MYSQL_PASSWORD
+            - name: MARIADB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: wordpress-secrets

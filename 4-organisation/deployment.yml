@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: webservice
-        image: emilevauge/whoami
+        image: containous/whoami
         ports:
           - name: webservice-port
             containerPort: 80

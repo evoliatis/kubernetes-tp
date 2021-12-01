@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: emilevauge/whoami
+        image: containous/whoami
         ports:
         - name: http-port
           containerPort: 80
