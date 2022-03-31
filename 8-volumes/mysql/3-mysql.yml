@@ -4,6 +4,7 @@ metadata:
   name: mysql.evoliatis.fr
   labels:
     app: mysql
+  namespace: devtools
 spec:
   selector:
     matchLabels:
