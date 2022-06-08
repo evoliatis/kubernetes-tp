@@ -7,11 +7,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: monitoring
+      app: monitoring
   template:
     metadata:
       labels:
-        name: monitoring
+        app: monitoring
     spec:
       containers:
       - name: monitoring
