@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: basic-nginx
+  namespace: stress
+  labels:
+    app: essai
+spec:
+  containers:
+  - name: stress-demo
+    image: evoliatis/stress
+    args:
+      - -c
+      - "1"
+    resources:
+      requests:
+        cpu: "50m"
+        memory: 16Mi
+      limits:
+        cpu: "100m"
+        memory: 32Mi
