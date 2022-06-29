@@ -47,7 +47,7 @@ metadata:
 spec:
   storageClassName: longhorn
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
@@ -269,9 +269,12 @@ kind: Ingress
 metadata:
   name: wordpress-rules
   namespace: app-wordpress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: wordpress.evoliatis.lan
+    - host: wordpress.node02.evoliatis.fr
       http:
         paths:
           - path: /
@@ -281,7 +284,22 @@ spec:
                 name: wordpress-service
                 port:
                   number: 31000
-    - host: phpmyadmin.evoliatis.lan
+  tls:
+    - secretName: tls-wordpress-production
+      hosts:
+        - wordpress.node02.evoliatis.fr
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phpmyadmin-rules
+  namespace: app-wordpress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-production  
+spec:
+  rules:
+    - host: pma.node02.evoliatis.fr
       http:
         paths:
           - path: /
@@ -291,3 +309,7 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 32000
+  tls:
+    - secretName: tls-phpmyadmin-production
+      hosts:
+        - pma.node02.evoliatis.fr
