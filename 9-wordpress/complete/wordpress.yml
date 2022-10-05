@@ -216,10 +216,10 @@ spec:
         tier: backend
     spec:
       containers:
-      - image: nazarpc/phpmyadmin
+      - image: phpmyadmin
         name: phpmyadmin
         env:
-        - name: MYSQL_HOST
+        - name: PMA_HOST
           value: wordpress-mysql
         ports:
         - containerPort: 80
