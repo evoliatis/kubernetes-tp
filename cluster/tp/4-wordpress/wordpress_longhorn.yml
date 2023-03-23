@@ -274,7 +274,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: wordpress.node02.evoliatis.fr
+    - host: wordpress.k8s02.evoliatis.fr
       http:
         paths:
           - path: /
@@ -287,7 +287,7 @@ spec:
   tls:
     - secretName: tls-wordpress-production
       hosts:
-        - wordpress.node02.evoliatis.fr
+        - wordpress.k8s02.evoliatis.fr
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

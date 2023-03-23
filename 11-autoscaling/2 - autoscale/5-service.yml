@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: stress
+  name: nginx-service
+  labels:
+    app: stress
+spec:
+  ports:
+  - port: 31002
+    nodePort: 31002
+    targetPort: deploy-port
+    protocol: TCP
+  selector:
+    app: stress
+  type: NodePort

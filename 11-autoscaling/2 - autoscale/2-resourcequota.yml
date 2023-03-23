@@ -1,11 +1,4 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: stress
-  labels:
-    app: stress
----
-apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: quota
@@ -17,4 +10,4 @@ spec:
     requests.memory: 32Mi
     requests.cpu: "100m"
     limits.memory: 64Mi
-    limits.cpu: "200m"  
+    limits.cpu: "1000m"  
