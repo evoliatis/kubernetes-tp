@@ -7,8 +7,8 @@ metadata:
     app: stress
 spec:
   ports:
-  - port: 31002
-    nodePort: 31002
+  - port: 31500
+    nodePort: 31500
     targetPort: deploy-port
     protocol: TCP
   selector:

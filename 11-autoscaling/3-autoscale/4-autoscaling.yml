@@ -1,7 +1,7 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: stress-autoscaler
+  name: nginx-autoscaler
   namespace: stress  
 spec:
   scaleTargetRef:
@@ -9,11 +9,11 @@ spec:
     kind: Deployment
     name: stress
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 5
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 10
+        averageUtilization: 60

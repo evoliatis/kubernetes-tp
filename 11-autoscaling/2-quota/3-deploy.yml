@@ -16,15 +16,15 @@ spec:
         app: stress
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.12
-        ports:
-        - name: deploy-port
-          containerPort: 80        
+      - name: stress
+        image: evoliatis/stress
+        args:
+          - -c
+          - "1"
         resources:
           requests:
-            cpu: "50m"
+            cpu: "100m"
             memory: 16Mi
           limits:
-            cpu: "100m"
-            memory: 32Mi
+            cpu: "250m"
+            memory: 32Mi            
