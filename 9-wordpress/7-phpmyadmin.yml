@@ -23,7 +23,7 @@ spec:
       - image: phpmyadmin
         name: phpmyadmin
         env:
-        - name: PMAL_HOST
+        - name: PMA_HOST
           value: wordpress-mysql
         ports:
         - containerPort: 80

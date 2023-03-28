@@ -299,7 +299,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: pma.node02.evoliatis.fr
+    - host: pma.k8s02.evoliatis.fr
       http:
         paths:
           - path: /
@@ -312,4 +312,4 @@ spec:
   tls:
     - secretName: tls-phpmyadmin-production
       hosts:
-        - pma.node02.evoliatis.fr
+        - pma.k8s02.evoliatis.fr
