@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-local
+  labels:
+    app: registry
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+spec:
+  selector:
+    matchLabels:
+      app: registry
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      containers:
+        - name: registry
+          image: registry:2
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: registry-volume
+              mountPath: /var/lib/registry
+              readOnly: false
+            - name: config-volume
+              mountPath: /etc/docker/registry/config.yml
+              subPath: config.yml
+              readOnly: true
+            - name: htusers-volume
+              mountPath: /etc/docker/registry/htusers
+              subPath: htusers
+              readOnly: true
+      volumes:
+        - name: registry-volume
+          persistentVolumeClaim:
+            claimName: registry-local
+        - name: config-volume
+          configMap:
+            name: registry-cm
+        - name: htusers-volume
+          configMap:
+            name: registry-cm
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: registry
