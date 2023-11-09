@@ -30,7 +30,7 @@ metadata:
   labels:
     app: wordpress
 spec:
-  storageClassName: longhorn
+  storageClassName: scw-bssd
   accessModes:
     - ReadWriteOnce
   resources:
@@ -45,7 +45,7 @@ metadata:
   labels:
     app: wordpress
 spec:
-  storageClassName: longhorn
+  storageClassName: scw-bssd 
   accessModes:
     - ReadWriteOnce
   resources:
@@ -274,7 +274,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: wordpress.docker02.evoliatis.fr
+    - host: www.evoliatis-hosting.fr
       http:
         paths:
           - path: /
@@ -287,7 +287,7 @@ spec:
   tls:
     - secretName: tls-wordpress-production
       hosts:
-        - wordpress.docker02.evoliatis.fr
+        - www.evoliatis-hosting.fr
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -299,7 +299,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: pma.docker02.evoliatis.fr
+    - host: pma.evoliatis-hosting.fr
       http:
         paths:
           - path: /
@@ -312,4 +312,4 @@ spec:
   tls:
     - secretName: tls-phpmyadmin-production
       hosts:
-        - pma.docker02.evoliatis.fr
+        - pma.evoliatis-hosting.fr
