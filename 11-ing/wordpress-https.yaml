@@ -15,6 +15,17 @@ spec:
                 name: wordpress-service
                 port:
                   number: 31000
+    - host: phpmyadmin.k8s0.evoliatis.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpmyadmin-service
+                port:
+                  number: 32000
   tls:
     - hosts:
       - wordpress.k8s0.evoliatis.fr
+      - phpmyadmin.k8s0.evoliatis.fr

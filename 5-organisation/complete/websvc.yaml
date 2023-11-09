@@ -36,8 +36,8 @@ metadata:
   namespace: webservice
 spec:
   ports:
-  - port: 31200
-    nodePort: 31200
+  - port: 31003
+    nodePort: 31003
     targetPort: webservice-port
     protocol: TCP
   selector:

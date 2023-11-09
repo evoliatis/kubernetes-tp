@@ -4,8 +4,8 @@ metadata:
   name: webservice-service
 spec:
   ports:
-  - port: 31100
-    nodePort: 31100
+  - port: 31004
+    nodePort: 31004
     targetPort: webservice-port
     protocol: TCP
   selector:
