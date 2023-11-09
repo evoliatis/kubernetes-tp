@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: web-rules
+  name: my-nginx-web
   labels:
-    app: web
+    app: nginx
 spec:
   rules:
 
-  - host: slave-01.en-ligne.evoliatis.fr
+  - host: formation-01.en-ligne.evoliatis.fr
     http:
       paths:
       - path: /
         backend:
-          serviceName: web-service
+          serviceName: nginx-service
           servicePort: 31000          

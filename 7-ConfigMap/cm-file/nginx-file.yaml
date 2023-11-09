@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-file
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - name: http-port
+      containerPort: 80
+    volumeMounts:
+    - name: config-volume
+      mountPath: /etc/nginx/nginx.conf
+      subPath: nginx.conf
+  volumes:
+  - name: config-volume
+    configMap: 
+      name: nginx-config
+      items:
+      - key: nginx.conf
+        path: nginx.conf

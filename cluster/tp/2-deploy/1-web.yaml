@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: slave-01.en-ligne.evoliatis.fr
+  name: my-deploy
   labels:
     app: web
 spec:

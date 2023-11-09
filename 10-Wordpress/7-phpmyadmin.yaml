@@ -1,0 +1,30 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: wordpress-back
+  namespace: app-wordpress
+  labels:
+    app: wordpress
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: backend
+    spec:
+      containers:
+      - image: phpmyadmin
+        name: phpmyadmin
+        env:
+        - name: PMA_HOST
+          value: wordpress-mysql
+        ports:
+        - containerPort: 80
+          name: phpmyadmin-port

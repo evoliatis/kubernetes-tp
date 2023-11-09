@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: slave-01-en-ligne-evoliatis-fr
+  name: nginx-http
   labels:
-    app: nginx
+    app: nginx  
 spec:
   ports:
-  - port: 31000
-    nodePort: 31000
-    targetPort: nginx-port
+  - port: 31300
+    nodePort: 31300
+    targetPort: http-port
     protocol: TCP
   selector:
     app: nginx

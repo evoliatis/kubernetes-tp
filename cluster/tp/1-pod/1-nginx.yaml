@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: k8s01.evoliatis.fr
+  name: my-pod-nginx
   labels:
     app: nginx
 spec:

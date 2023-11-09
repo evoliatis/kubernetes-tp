@@ -16,10 +16,10 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mariadb:10.6
+      - image: mysql:8
         name: mysql
         env:
-        - name: MARIADB_ROOT_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-db

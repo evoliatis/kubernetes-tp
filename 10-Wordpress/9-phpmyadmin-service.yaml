@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin-service
+  namespace: app-wordpress
+  labels:
+    app: wordpress
+    tier: backend
+spec:
+  ports:
+  - port: 32000
+    nodePort: 32000
+    targetPort: phpmyadmin-port
+    protocol: TCP
+  selector:
+    app: wordpress
+    tier: backend
+  type: NodePort
