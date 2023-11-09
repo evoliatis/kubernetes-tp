@@ -41,7 +41,7 @@ spec:
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: mysql.evoliatis.fr
+  name: mysql-with-pvc
   labels:
     app: mysql
 spec:

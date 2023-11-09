@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mount.config.evoliatis.fr
+  name: cm-mount
   labels:
     app: nginx
 spec:

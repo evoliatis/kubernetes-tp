@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mount.secret.evoliatis.fr
+  name: secrets-mount
   labels:
     app: nginx
 spec:
