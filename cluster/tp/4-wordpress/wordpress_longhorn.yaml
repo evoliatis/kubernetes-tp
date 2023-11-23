@@ -45,9 +45,9 @@ metadata:
   labels:
     app: wordpress
 spec:
-  storageClassName: longhorn
+  storageClassName: nfs-client
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
@@ -225,10 +225,10 @@ spec:
         tier: backend
     spec:
       containers:
-        - image: nazarpc/phpmyadmin
+        - image: phpmyadmin
           name: phpmyadmin
           env:
-            - name: MYSQL_HOST
+            - name: PMA_HOST
               value: wordpress-mysql
           ports:
             - containerPort: 80
@@ -274,7 +274,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: wordpress.docker02.evoliatis.fr
+    - host: wordpress.k8s1.evoliatis.eu
       http:
         paths:
           - path: /
@@ -287,7 +287,7 @@ spec:
   tls:
     - secretName: tls-wordpress-production
       hosts:
-        - wordpress.docker02.evoliatis.fr
+        - wordpress.k8s1.evoliatis.eu
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -299,7 +299,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: pma.docker02.evoliatis.fr
+    - host: phpmyadmin.k8s1.evoliatis.eu
       http:
         paths:
           - path: /
@@ -312,4 +312,4 @@ spec:
   tls:
     - secretName: tls-phpmyadmin-production
       hosts:
-        - pma.docker02.evoliatis.fr
+        - phpmyadmin.k8s1.evoliatis.eu
