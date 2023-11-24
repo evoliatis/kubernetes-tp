@@ -45,9 +45,9 @@ metadata:
   labels:
     app: wordpress
 spec:
-  storageClassName: nfs-client
+  storageClassName: longhorn
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
@@ -296,10 +296,10 @@ metadata:
   namespace: app-wordpress
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-production  
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   rules:
-    - host: phpmyadmin.k8s1.evoliatis.eu
+    - host: phpmyadmin.evoliatis.eu
       http:
         paths:
           - path: /
@@ -309,7 +309,18 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 32000
+    - host: wordpress.evoliatis.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress-service
+                port:
+                  number: 31000
   tls:
     - secretName: tls-phpmyadmin-production
       hosts:
-        - phpmyadmin.k8s1.evoliatis.eu
+        - phpmyadmin.evoliatis.eu
+        - wordpress.evoliatis.eu
