@@ -5,7 +5,7 @@ metadata:
   namespace: app-wordpress
 spec:
   rules:
-    - host: wordpress.k8s0.evoliatis.fr
+    - host: wpress.k8s00.evoliatis.eu
       http:
         paths:
           - path: /
@@ -15,7 +15,7 @@ spec:
                 name: wordpress-service
                 port:
                   number: 31000
-    - host: phpmyadmin.k8s0.evoliatis.fr
+    - host: pma.k8s00.evoliatis.eu
       http:
         paths:
           - path: /
@@ -27,5 +27,5 @@ spec:
                   number: 32000
   tls:
     - hosts:
-      - wordpress.k8s0.evoliatis.fr
-      - phpmyadmin.k8s0.evoliatis.fr
+      - wpress.k8s00.evoliatis.eu
+      - pma.k8s00.evoliatis.eu
