@@ -19,3 +19,4 @@ spec:
         - /tmp/healthy
       initialDelaySeconds: 20
       periodSeconds: 30
+      failureThreshold: 3
