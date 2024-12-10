@@ -17,7 +17,9 @@ spec:
       periodSeconds: 10
     livenessProbe:
       failureThreshold: 3
-      tcpSocket:
+      httpGet:
+        path: /
         port: 80
       initialDelaySeconds: 15
-      periodSeconds: 20
+      timeoutSeconds: 30
+      periodSeconds: 30

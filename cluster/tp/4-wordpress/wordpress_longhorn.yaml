@@ -274,7 +274,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production  
 spec:
   rules:
-    - host: wordpress.k8s1.evoliatis.eu
+    - host: wordpress.k8s02.evoliatis.eu
       http:
         paths:
           - path: /
@@ -287,7 +287,7 @@ spec:
   tls:
     - secretName: tls-wordpress-production
       hosts:
-        - wordpress.k8s1.evoliatis.eu
+        - wordpress.k8s02.evoliatis.eu
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -299,7 +299,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   rules:
-    - host: phpmyadmin.evoliatis.eu
+    - host: pma.rancher02.evoliatis.eu
       http:
         paths:
           - path: /
@@ -309,7 +309,7 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 32000
-    - host: wordpress.evoliatis.eu
+    - host: wp.rancher02.evoliatis.eu
       http:
         paths:
           - path: /
@@ -322,5 +322,5 @@ spec:
   tls:
     - secretName: tls-phpmyadmin-production
       hosts:
-        - phpmyadmin.evoliatis.eu
-        - wordpress.evoliatis.eu
+        - pma.rancher02.evoliatis.eu
+        - wp.rancher02.evoliatis.eu
