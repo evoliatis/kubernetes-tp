@@ -47,7 +47,7 @@ metadata:
 spec:
   storageClassName: longhorn
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
@@ -271,35 +271,10 @@ metadata:
   namespace: app-wordpress
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-production  
-spec:
-  rules:
-    - host: wordpress.k8s02.evoliatis.eu
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: wordpress-service
-                port:
-                  number: 31000
-  tls:
-    - secretName: tls-wordpress-production
-      hosts:
-        - wordpress.k8s02.evoliatis.eu
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: phpmyadmin-rules
-  namespace: app-wordpress
-  annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   rules:
-    - host: pma.rancher02.evoliatis.eu
+    - host: pma.k8s02.evoliatis.eu
       http:
         paths:
           - path: /
@@ -309,7 +284,7 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 32000
-    - host: wp.rancher02.evoliatis.eu
+    - host: wp.k8s02.evoliatis.eu
       http:
         paths:
           - path: /
@@ -320,7 +295,7 @@ spec:
                 port:
                   number: 31000
   tls:
-    - secretName: tls-phpmyadmin-production
+    - secretName: tls-wordpress
       hosts:
-        - pma.rancher02.evoliatis.eu
-        - wp.rancher02.evoliatis.eu
+        - pma.k8s02.evoliatis.eu
+        - wp.k8s02.evoliatis.eu
