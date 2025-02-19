@@ -4,7 +4,7 @@ metadata:
   name: minio
   namespace: minio
   labels:
-    name: minio
+    app: minio
 spec:
   serviceName: minio
   replicas: 4
