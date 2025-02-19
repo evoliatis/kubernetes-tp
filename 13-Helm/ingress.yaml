@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress-rules
+  namespace: app-wordpress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production  
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: wpress.k8s00.evoliatis.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress-service
+                port:
+                  number: 31000
+  tls:
+    - secretName: tls-wordpress-production
+      hosts:
+        - wpress.k8s00.evoliatis.eu
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phpmyadmin-rules
+  namespace: app-wordpress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production  
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: pma.k8s00.evoliatis.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpmyadmin-service
+                port:
+                  number: 32000
+  tls:
+    - secretName: tls-phpmyadmin-production
+      hosts:
+        - pma.k8s00.evoliatis.eu
